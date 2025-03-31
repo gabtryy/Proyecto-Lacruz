@@ -3,7 +3,7 @@
 session_start();
 if (!isset($_SESSION['user_email']))
 {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -97,7 +97,7 @@ if (!isset($_SESSION['user_email']))
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../controladores/cerrar.php">cerrar sesion</a>
+          <a class="nav-link" href="../controladores/cerrar.php">cerrar sesion now</a>
         </li>
        
       </ul>
