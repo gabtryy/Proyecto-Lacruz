@@ -1,39 +1,23 @@
 <?php
-// index.php
+session_start();
+include_once('app/database.php');
+include_once('models/Mlogin.php');
 
-session_start(); // Iniciar la sesión
+$loginControl = new usuario();
 
-// Incluye el archivo de conexión a la base de datos
-include_once('database.php');
-
-// Incluye el controlador
-include_once('controladores/login.php');
-
-$loginControl = new Lcontroler($pdo);
-
-
-
-// Verifica si el usuario ya está logueado
+// Verificar si ya está logueado
 if (isset($_SESSION['user_id'])) {
-    header('Location: '.$URL.'/vistas/inicio.php');
-    exit; 
-    
-}
-else
-{
-    $loginControl->MostrarLogin();
+    header('Location: vistas/inicio.php');
+    exit;
 }
 
-// Crear una instancia del controlador y pasarle $pdo
-
-
-if(isset($_POST['btn-cerrar'])){
+// Manejar cierre de sesión
+if(isset($_POST['btn-cerrar'])) {
     $loginControl->Cerrarsession();
 }
 
-if (isset($_POST['btnLogin'])) {
-    $loginControl->login();
-  
-} else {
+// Mostrar login si no está autenticado
+if (!isset($_SESSION['user_id'])) {
     $loginControl->MostrarLogin();
+    exit;
 }

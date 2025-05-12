@@ -27,8 +27,8 @@ if (!isset($_SESSION['user_email']))
            
         }
         .navbar {
-            background-color:   rgb(56, 165, 255); /* Fondo blanco para la tarjeta */
-            
+            background-image: linear-gradient(rgb(76, 255, 255),rgb(129, 135, 255)); /* Fondo blanco para la tarjeta */
+             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.64); 
         }
         .navbar-brand {
             color:rgb(55, 0, 255);
