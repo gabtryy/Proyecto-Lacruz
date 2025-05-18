@@ -73,7 +73,7 @@
                   <h4 class="mt-1 mb-5 pb-1">Multiservicios lacruz</h4>
                 </div>
                 
-                <form method = "POST" action="controladores/login.php">
+                <form method = "POST" action="index.php?action=entrar">
                   
 
                   <div data-mdb-input-init class="form-outline mb-4">

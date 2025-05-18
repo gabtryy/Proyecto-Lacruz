@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 if (!isset($_SESSION['user_email']))
 {
     header('Location: ../login.php');
@@ -97,7 +97,7 @@ if (!isset($_SESSION['user_email']))
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../controladores/cerrar.php">cerrar sesion</a>
+          <a class="nav-link" href="<?php echo $URL; ?>/index.php?action=cerrar">cerrar sesion</a>
         </li>
        
       </ul>
@@ -113,7 +113,7 @@ if (!isset($_SESSION['user_email']))
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
-                        <img src="images/clients.png"   width="50" height="50" />
+                        <img src="vistas/images/clients.png"   width="50" height="50" />
                         </div>
                         <h5 class="card-title">Clientes</h5>
                         <p class="card-text">añade o gestiona clientes</p>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['user_email']))
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
-                        <img src="images/money.png"   width="50" height="50" />
+                        <img src="vistas/images/money.png"   width="50" height="50" />
                         </div>
                         <h5 class="card-title">Presupuesto</h5>
                         <p class="card-text">calcula el presupuesto del servicio</p>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['user_email']))
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
-                        <img src="images/box.png"   width="50" height="50" />
+                        <img src="vistas/images/box.png"   width="50" height="50" />
                         </div>
                         <h5 class="card-title">Servicio</h5>
                         <p class="card-text">añade, elimina, o gestiona un servicio</p>
@@ -146,7 +146,7 @@ if (!isset($_SESSION['user_email']))
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
-                        <img src="images/bill.png"   width="50" height="50" />
+                        <img src="vistas/images/bill.png"   width="50" height="50" />
                         </div>
                         <h5 class="card-title">facturacion</h5>
                         <p class="card-text">crea y calcula la factura de un servicio</p>
