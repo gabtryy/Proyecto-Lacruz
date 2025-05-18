@@ -25,9 +25,25 @@ $loginControl->MostrarLogin();
             loginC($_POST['email'], $_POST['password']);
         }
         break;
+    case 'home':
+        require_once 'vistas/inicio.php';
+        break;
     case 'cerrar':
         cerrar();
         break;
+    case 'clientes':
+        require_once 'vistas/clientes/cliente.php';
+        break;
+    case 'clientes_info':
+        require_once 'vistas/clientes/cliente_info.php';
+        break;
+    case 'registrar_cliente':
+        require_once 'vistas/clientes/cliente_registro.php';
+        break;
+    case 'usuarios':
+        $usuarios = listarU();
+        require_once 'vistas/usuarios/usuario.php';
+        break;    
     default:
         # code...
         break;

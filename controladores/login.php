@@ -22,6 +22,11 @@ require_once __DIR__ . '/../models/Mlogin.php'; // Corregir ruta
         require __DIR__ . '/../login.php';
     }
 }
+    function listarU(){
+    $usuario = new usuario();
+    return $usuario->listarUsuario();
+    }
+
     function cerrar(){
         $loginControl = new usuario();
 
