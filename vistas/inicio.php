@@ -20,6 +20,7 @@ require_once('header.php');
                 </a>
             </div>
             <div class="col-md-3">
+                 <a href="<?php echo $URL; ?>/index.php?action=presupuesto" style="text-decoration: none; color: inherit;">
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
@@ -29,6 +30,7 @@ require_once('header.php');
                         <p class="card-text">calcula el presupuesto del servicio</p>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3">
                 <div class="card step-card">
@@ -42,7 +44,7 @@ require_once('header.php');
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card step-card noselec">
+                <div class="card step-card ">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
                         <img src="vistas/images/bill.png"   width="50" height="50" />

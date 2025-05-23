@@ -40,6 +40,9 @@ $loginControl->MostrarLogin();
     case 'registrar_cliente':
         require_once 'vistas/clientes/cliente_registro.php';
         break;
+    case 'presupuesto':
+        require_once 'vistas/presupuesto/registro.php';
+        break;
     case 'usuarios':
         $usuarios = listarU();
         require_once 'vistas/usuarios/usuario.php';
