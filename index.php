@@ -48,7 +48,28 @@ $loginControl->MostrarLogin();
         break;
     case 'servicios_registro':
         require_once 'vistas/servicios/registro.php';
-        break;        
+        break;
+    case 'factura':
+         require_once 'vistas/factura/factura.php';
+        break;
+    case 'producto':
+         require_once 'vistas/producto/producto.php';
+        break;
+    case 'producto_registro':
+         require_once 'vistas/producto/producto_registro.php';
+        break;
+    case 'provedores':
+        require_once 'vistas/provedores/provedores.php';
+        break; 
+    case 'provedores_registro':
+        require_once 'vistas/provedores/provedores_registro.php';
+        break;
+    case 'materia':
+        require_once 'vistas/materia/materia.php';
+        break;
+    case 'materia_registro':
+        require_once 'vistas/materia/materia_registro.php';
+        break;                                
     case 'usuarios':
         $usuarios = listarU();
         require_once 'vistas/usuarios/usuario.php';

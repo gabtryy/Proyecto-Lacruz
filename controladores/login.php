@@ -11,7 +11,7 @@ require_once __DIR__ . '/../models/Mlogin.php'; // Corregir ruta
 
     if ($password == $User['password']) {
         session_start(); // Mover al inicio del archivo
-        $_SESSION['user_id'] = $User['cedula'];
+        $_SESSION['user_id'] = $User['id'];
         $_SESSION['user_email'] = $User['email'];
         $_SESSION['user_name'] = $User['nombre'];
 
