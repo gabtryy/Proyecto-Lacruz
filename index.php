@@ -43,6 +43,12 @@ $loginControl->MostrarLogin();
     case 'presupuesto':
         require_once 'vistas/presupuesto/registro.php';
         break;
+    case 'servicios':
+        require_once 'vistas/servicios/servicios.php';
+        break;
+    case 'servicios_registro':
+        require_once 'vistas/servicios/registro.php';
+        break;        
     case 'usuarios':
         $usuarios = listarU();
         require_once 'vistas/usuarios/usuario.php';

@@ -113,7 +113,7 @@
     </div>
   </div>
 
-    <!-- Bootstrap JS y dependencias -->
+    
       <script> src ="proyecto-lacruz/bootstrap/js/bootstrap.min.js"</script>
     <script> src ="proyecto-lacruz/bootstrap/js/bootstrap.bundle.min.js"</script>
 </body>

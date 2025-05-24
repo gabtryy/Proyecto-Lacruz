@@ -102,21 +102,21 @@
       <td>pico y poda</td>
       <td>30 pipas desinfectante</td>
       <td>5000000</td>
-      <td><a href="#" class ="tbc">aprobar</a></td>
+      <td><a href="#" class ="tbc">aprobar</a> I <a href="#" class ="tbc">rechazar</a></td>
     </tr>
     <tr>
       <th >Jacob</th>
       <td>limpieza</td>
       <td>no aplica</td>
       <td>6000000</td>
-      <td><a href="index.php?action=clientes_info" class ="tbc">Info</a></td>
+      <td><a href="#" class ="tbc">aprobar</a> I <a href="#" class ="tbc">rechazar</a></td>
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>@twitter</td>
-      <td>0424</td>
-      <td><a href="index.php?action=clientes_info" class ="tbc">Info</a></td>
+      <th >kevin</th>
+      <td>limpieza hodromatica</td>
+      <td>no aplica</td>
+      <td>6000000</td>
+      <td><a href="#" class ="tbc">aprobar</a> I <a href="#" class ="tbc">rechazar</a></td>
     </tr>
   </tbody>
 </table>

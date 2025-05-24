@@ -33,6 +33,7 @@ require_once('header.php');
                 </a>
             </div>
             <div class="col-md-3">
+                <a href="index.php?action=servicios" style="text-decoration: none; color: inherit;">
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
@@ -42,6 +43,7 @@ require_once('header.php');
                         <p class="card-text">añade, elimina, o gestiona un servicio</p>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3">
                 <div class="card step-card ">
