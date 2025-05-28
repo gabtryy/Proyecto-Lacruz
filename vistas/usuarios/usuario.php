@@ -28,7 +28,7 @@
   <tbody>
  <?php foreach ($usuarios as $usuarios): ?>
             <tr>
-                <td><?= $usuarios['id'] ?></td>
+                <td><?= $usuarios['cedula'] ?></td>
                 <td><?= $usuarios['nombre'] ?></td>
                 <td><?= $usuarios['email'] ?></td>
 

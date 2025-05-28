@@ -67,7 +67,7 @@ if (!isset($_SESSION['user_email']))
           font-family: 'Arial', sans-serif;
           font-weight: 700; 
           font-style: italic;
-            background-image: linear-gradient(rgb(76, 255, 255),rgb(129, 135, 255)); /* Fondo blanco para la tarjeta */
+            background-color: #f8f9fa; /* Fondo blanco para la tarjeta */
              box-shadow: 0 8px 16px rgba(0, 0, 0, 0.64); 
         }
         .navbar-brand {
@@ -75,7 +75,7 @@ if (!isset($_SESSION['user_email']))
             
         }
         .dropdown-menu:hover {
-           color: #e9ecef; /* Mantener el fondo gris al enfocar */
+           color:rgb(0, 128, 255); /* Mantener el fondo gris al enfocar */
            
         }
         .nav-link {
@@ -98,11 +98,11 @@ if (!isset($_SESSION['user_email']))
         }
         
         .nav-link:hover {
-            color:rgb(255, 255, 255); /* Color azul para el botón */
+            color:rgb(84, 153, 199); /* Color azul para el botón */
             border: none;
         }
         .navbar-brand:hover {
-            color:rgb(255, 255, 255); /* Color azul más oscuro al pasar el mouse */
+            color:rgb(139, 216, 252); /* Color azul más oscuro al pasar el mouse */
         }
         .step-icon {
             width: 80px;
@@ -129,7 +129,8 @@ if (!isset($_SESSION['user_email']))
 
 <nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php?action=home">J.Lacruz</a>
+    <img src="vistas/images/logo2.png" style="width: 50px;" alt="logo">
+    <a class="navbar-brand" href="index.php?action=home" >J.Lacruz</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

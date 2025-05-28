@@ -86,7 +86,7 @@ if(isset($_POST['btn-cerrar'])) {
     
 }
 
-// Mostrar login si no está autenticado
+
 if (!isset($_SESSION['user_id'])) {
     
     exit;
