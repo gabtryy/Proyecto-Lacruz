@@ -140,17 +140,7 @@ if (!isset($_SESSION['user_email']))
         <li class="nav-item">
           <a class="nav-link" href="index.php?action=usuarios">Usuarios</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acciones
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Clientes</a></li>
-            <li><a class="dropdown-item" href="#">Presupuesto</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Servicios</a></li>
-          </ul>
-        </li>
+     
         <li class="nav-item">
           <a class="nav-link" href="<?php echo $URL; ?>/index.php?action=cerrar">cerrar sesion</a>
         </li>

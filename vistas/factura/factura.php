@@ -1,7 +1,34 @@
    <?php
-  include_once('vistas/header.php');
+  include_once('vistas/header2.php');
   ?>
-
+<div class="container py-4 h-100">
+    <div class="row align-items-center mb-4">
+       
+        <div class="col-md-3">
+            <a href="<?php echo $URL; ?>/index.php?action=registrar_cliente" style="text-decoration: none; color: inherit;">
+                <div class="cardj step-card text-white noselec">
+                    <div class="row g-0">
+                        <div class="card-body p-md-2 mx-md-2">
+                            <div class="text-center">
+                                <h4 class="mt-1 mb-2 pb-1">Hacer factura</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+       
+        <div class="col-md-6 text-center">
+            <h2 class="mb-0">Facturas</h2> 
+        </div>
+        
+        
+        <div class="col-md-3"></div>
+    </div>
+    
+  
+</div>
  <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-12">
@@ -10,10 +37,6 @@
             
               <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                 
-                  <h4 class="mt-1 mb-5 pb-1">facturas</h4>
-                </div>
                 
   <table class="table table-transparent">
   <thead>
@@ -43,7 +66,7 @@
       <td><a href="#" class ="tbc">PDF</a> I <a href="#" class ="tbc">ANULAR</a></td>
     </tr>
     <tr>
-      <th >kevin</th>
+      <th>kevin</th>
       <td>limpieza hodromatica</td>
       <td>no aplica</td>
       <td>6000000</td>

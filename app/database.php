@@ -16,7 +16,7 @@ class conexion {
     }
 }
 
-$URL = "http://localhost/proyecto-lacruz";
+$URL = "http://localhost/proyecto-lacruz1";
 date_default_timezone_set("America/Caracas");
 $fechahora = date("Y-m-d H:i:s");
 ?>

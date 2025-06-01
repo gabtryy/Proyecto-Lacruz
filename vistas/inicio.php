@@ -66,12 +66,40 @@ require_once('header.php');
                         <img src="vistas/images/producto.png"   width="50" height="50" />
                         </div>
                         <h5 class="card-title">producto</h5>
-                        <p class="card-text">crea y calcula la factura de un servicio</p>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+                </a>
+            </div>
+                <div class="col-md-4">
+                <a href="index.php?action=materia" style="text-decoration: none; color: inherit;">
+                <div class="card step-card ">
+                    <div class="card-body text-center">
+                        <div class="step-icon mx-auto">
+                        <img src="vistas/images/producto.png"   width="50" height="50" />
+                        </div>
+                        <h5 class="card-title">materia prima</h5>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+                </a>
+            </div>
+                <div class="col-md-4">
+                <a href="index.php?action=provedores" style="text-decoration: none; color: inherit;">
+                <div class="card step-card ">
+                    <div class="card-body text-center">
+                        <div class="step-icon mx-auto">
+                        <img src="vistas/images/producto.png"   width="50" height="50" />
+                        </div>
+                        <h5 class="card-title">provedores</h5>
+                        <p class="card-text"></p>
                     </div>
                 </div>
                 </a>
             </div>
         </div>
+        
+        
     </div>
 
 

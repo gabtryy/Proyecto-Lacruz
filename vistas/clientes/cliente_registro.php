@@ -1,7 +1,14 @@
   <?php
   include_once('vistas/header.php');
   ?>
-
+  <div class="text-center">
+                 
+                  <h4 class="mt-1 mb-5 pb-1"></h4>
+    </div>
+    <div class="text-center">
+                 
+                  <h4 class="mt-1 mb-2 pb-1">Nuevo cliente</h4>
+    </div>
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-12">
@@ -10,12 +17,9 @@
             
               <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                 
-                  <h4 class="mt-1 mb-5 pb-1">Clientes</h4>
-                </div>
                 
-                  <form method = "POST" action="index.php?action=entrar">
+                
+                  <form method = "POST" action="index.php?action=registrar_cliente">
                   
                     <H5>RIF</H5>
                  <div data-mdb-input-init class="form-outline  mb-4">
@@ -37,6 +41,11 @@
                       <H5>correo</H5>
                  <div data-mdb-input-init class="form-outline  mb-4">
                     <input type="email" id="email" class="form-control" name = "email" id = "email" placeholder="introdusca un correo electronico"/>
+                    
+                  </div>
+                        <H5>direccion</H5>
+                 <div data-mdb-input-init class="form-outline  mb-4">
+                    <input type="text" id="direccion" class="form-control" name = "direccion" id = "direccion" placeholder="introdusca una direccion"/>
                     
                   </div>
                   <div class="text-center pt-1 mb-5 pb-1">

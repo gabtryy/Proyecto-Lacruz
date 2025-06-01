@@ -7,7 +7,7 @@
     </div>
     <div class="text-center">
                  
-                  <h4 class="mt-1 mb-2 pb-1">Nuevo servicio</h4>
+                  <h4 class="mt-1 mb-2 pb-1">Nuevo Usuario</h4>
     </div>
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -17,7 +17,7 @@
             
               <div class="card-body p-md-5 mx-md-4">
 
-                  <form action="index.php?action=crearServicio" method="POST">
+                  <form action="index.php?action=crearusuario" method="POST">
                     <H5>Nombre</H5>
                   
                    <div data-mdb-input-init class="form-outline mb-4">
@@ -25,22 +25,22 @@
                       placeholder="indrodusca el nombre" />
             
                   </div>
-                       <H5>Descripcion</H5>
+                       <H5>Email</H5>
                   
                    <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" id="descripcion" name = "descripcion" class="form-control"
-                      placeholder="indrodusca una descripcion" />
+                    <input type="text" id="email" name = "email" class="form-control"
+                      placeholder="indrodusca un email" />
             
                   </div>
-                    <H5>Precio</H5>
+                    <H5>password</H5>
                  <div data-mdb-input-init class="form-outline  mb-4">
-                    <input type="number" id="precio" class="form-control" name = "precio_hora" placeholder="introdusca el precio"/>
+                    <input type="password" id="password1" class="form-control" name = "password1" placeholder="introdusca una contraseña"/>
                     
                   </div>
                   </div>
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button  type="submit" class="btn btn-outline-info">Registar</button>
-                   <a style="margin-left: 20px;" href="index.php?action=servicios" class="btn btn-outline-info">Cancelar</a>
+                   <a style="margin-left: 20px;" href="index.php?action=crearusuario" class="btn btn-outline-info">Cancelar</a>
                   </div>
 
          

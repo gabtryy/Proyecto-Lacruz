@@ -1,7 +1,14 @@
   <?php
-  include_once('vistas/header.php');
+  include_once('vistas/header2.php');
   ?>
-
+  <div class="text-center">
+                 
+                  <h4 class="mt-1 mb-5 pb-1"></h4>
+    </div>
+    <div class="text-center">
+                 
+                  <h4 class="mt-1 mb-2 pb-1">Nuevo Provedor</h4>
+    </div>
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-12">
@@ -10,12 +17,9 @@
             
               <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                 
-                  <h4 class="mt-1 mb-5 pb-1">provedor nuevo</h4>
-                </div>
+               
                 
-                  <form method = "POST" action="index.php?action=entrar">
+                  <form method = "POST" action="index.php?action=provedores_registro">
                   
                     <H5>RIF</H5>
                  <div data-mdb-input-init class="form-outline  mb-4">
