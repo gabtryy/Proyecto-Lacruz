@@ -7,7 +7,7 @@ require_once('header.php');
         <h2 class="text-center mb-5">Gestion de servicios</h2>
         <div class="row g-4 justify-content-center">
             <div class="col-md-3">
-                <a href="<?php echo $URL; ?>/index.php?action=clientes" style="text-decoration: none; color: inherit;">
+                <a href="index.php?action=clientes" style="text-decoration: none; color: inherit;">
                 <div class="card step-card">
                     <div class="card-body text-center">
                         <div class="step-icon mx-auto">
