@@ -39,7 +39,7 @@ JOIN cliente c ON f.rif = c.rif";
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-   public function guardarpresupuesto($datosPresupuesto, $servicios) {
+   public function guardarpresupuesto($datosPresupuesto, $servicios, $productos) {
     $this->pdo->beginTransaction();
 
     $sqlPresupuesto = "INSERT INTO factura (rif, fecha, numero_orden, id_forma_pago, id_iva, total_iva, total_general, id_tasa, estado_pago, estatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -66,6 +66,15 @@ JOIN cliente c ON f.rif = c.rif";
             $servicio['id_servicio'],
             $idPresupuesto,
             $servicio['cantidad']
+        ]);
+    }
+    foreach ($productos as $producto) {
+        $sqlProducto = "INSERT INTO producto_det (id_producto, id_factura, cantidad) VALUES (?, ?, ?)";
+        $stmtProducto = $this->pdo->prepare($sqlProducto);
+        $stmtProducto->execute([
+            $producto['id_producto'],
+            $idPresupuesto,
+            $producto['cantidad']
         ]);
     }
     $this->pdo->commit();

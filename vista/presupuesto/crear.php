@@ -43,11 +43,13 @@
                             <div class="mb-4">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5>Productos</h5>
-                                    <button type="button" class="btn btn-sm btn-primary" >
+                                    <button type="button" class="btn btn-sm btn-primary" id="btn-add-producto" >
                                         <i class="fas fa-plus"></i> Añadir Producto 
                                     </button>
                                 </div>
-                              
+                                <div id="lista-productos">
+                                    
+                                </div>
                             </div>
 
                            
@@ -102,7 +104,28 @@
     </div>
 </div>
 
-
+<template id="template-producto">
+    <div class="row item-producto mb-2">
+        <div class="col-md-6">
+            <select class="form-select producto-select" required>
+                <option value="" selected disabled>Seleccione productos</option>
+                <?php foreach($productos as $producto): ?>
+                <option value="<?= $producto['id_producto'] ?>">
+                    <?= htmlspecialchars($producto['nombre'])?> - <?= htmlspecialchars($producto['precio']) ?>.bs
+                </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control cantidad" min="1" value="1" required>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-sm btn-remove">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>
+</template>
 <template id="template-servicio">
     <div class="row item-servicio mb-2">
         <div class="col-md-6">
@@ -126,9 +149,11 @@
     </div>
 </template>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     let servicioCounter = 0;
+    let productoCounter = 0;
 
     document.getElementById('btn-add-servicio').addEventListener('click', function() {
         const template = document.getElementById('template-servicio');
@@ -144,10 +169,29 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('lista-servicios').appendChild(clone);
         servicioCounter++;
     });
+    document.getElementById('btn-add-producto').addEventListener('click', function() {
+        const template = document.getElementById('template-producto');
+        const clone = template.content.cloneNode(true);
 
+        // Asigna nombres únicos a los inputs de este producto
+        const select = clone.querySelector('.producto-select');
+        const cantidad = clone.querySelector('.cantidad');
+
+        select.setAttribute('name', `producto[${productoCounter}][id_producto]`);
+        cantidad.setAttribute('name', `producto[${productoCounter}][cantidad]`);
+
+        document.getElementById('lista-productos').appendChild(clone);
+        productoCounter++;
+    });
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('btn-remove')) {
-            e.target.closest('.item-servicio').remove();
+            const itemServicio = e.target.closest('.item-servicio');
+            const itemProducto = e.target.closest('.item-producto');
+            if (itemServicio) {
+                itemServicio.remove();
+            } else if (itemProducto) {
+                itemProducto.remove();
+            }
         }
     });
 

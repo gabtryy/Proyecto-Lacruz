@@ -3,12 +3,12 @@
 require_once 'modelo/presupuesto.php';
 require_once 'modelo/cliente.php';
 require_once 'modelo/ServicioModelo.php';
-
+require_once 'modelo/ProductoModelo.php';
 
 $presupuestoModel = new PresupuestoModel();
 $clienteModel = new ClienteModel();
 $servicioModel = new Servicio();
-
+$productoModel = new Producto();
 
 switch ($metodo) {
     case 'index':
@@ -21,6 +21,7 @@ switch ($metodo) {
         $formasPago = $presupuestoModel->formasdePago();
         $clientes = $clienteModel->listar();
         $servicios = $servicioModel->listar();
+        $productos = $productoModel->listar();
         
         require 'vista/presupuesto/crear.php';
         break;
@@ -37,6 +38,7 @@ switch ($metodo) {
         $fecha_registro = date("Y-m-d H:i:s");
 
         // Calcular subtotales y total en el backend
+        $productos = [];
         $servicios = [];
         $total = 0;
 
@@ -61,6 +63,27 @@ switch ($metodo) {
                 }
             }
         }
+        if (isset($_POST['producto']) && is_array($_POST['producto'])) {
+            foreach ($_POST['producto'] as $producto) {
+                if (
+                    isset($producto['id_producto']) &&
+                    isset($producto['cantidad'])
+                ) {
+                    // Obtener precio real desde la base de datos
+                    $infoProducto = $productoModel->buscarPorId($producto['id_producto']);
+                    $precio = $infoProducto['precio'];
+                    $cantidad = (int)$producto['cantidad'];
+                    $subtotal = $precio * $cantidad;
+                    $total += $subtotal;
+
+                    $productos[] = [
+                        'id_producto' => $producto['id_producto'],
+                        'cantidad' => $cantidad,
+                        'subtotal' => $subtotal
+                    ];
+                }
+            }
+        }
 
         $ivapor = ($total * $porcentajeIva) / 100;
         $totaliva = $total + $ivapor;
@@ -78,7 +101,7 @@ switch ($metodo) {
             'estatus' => 'presupuesto'
         ];
 
-        $presupuestoModel->guardarpresupuesto($datosPresupuesto, $servicios);
+        $presupuestoModel->guardarpresupuesto($datosPresupuesto, $servicios, $productos);
 
         header("Location: index.php?c=presupuesto&m=index");
         break;
