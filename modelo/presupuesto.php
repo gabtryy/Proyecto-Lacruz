@@ -60,13 +60,12 @@ JOIN cliente c ON f.rif = c.rif";
     $idPresupuesto = $this->pdo->lastInsertId();
 
     foreach ($servicios as $servicio) {
-        $sqlServicio = "INSERT INTO servicio_det (id_servicio, id_factura, cantidad, subtotal) VALUES (?, ?, ?, ?)";
+        $sqlServicio = "INSERT INTO servicio_det (id_servicio, id_factura, cantidad) VALUES (?, ?, ?)";
         $stmtServicio = $this->pdo->prepare($sqlServicio);
         $stmtServicio->execute([
             $servicio['id_servicio'],
             $idPresupuesto,
-            $servicio['cantidad'],
-            $servicio['subtotal']
+            $servicio['cantidad']
         ]);
     }
     $this->pdo->commit();

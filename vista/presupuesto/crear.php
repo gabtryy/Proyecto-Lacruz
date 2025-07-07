@@ -24,15 +24,7 @@
                                         <?php endforeach; ?>
                                     </select>
 
-                                    <label for="cliente_rif" class="form-label">Forma de pago</label>
-                                    <select class="form-select" id="forma_pago" name="forma_pago" required>
-                                        <option value="">Seleccione una forma de pago:</option>
-                                        <?php foreach ($formasPago as $pagos): ?>                                            
-                                        <option value="<?php echo $pagos['id_forma_pago']; ?>">
-                                            <?php echo htmlspecialchars($pagos['forma']); ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>  
+                                    
                                 </div>
                                 
                                 
@@ -81,6 +73,15 @@
                                                value="0.00" readonly>
                                         <span class="input-group-text">Bs.</span>
                                     </div>
+                                    <label for="cliente_rif" class="form-label">Forma de pago</label>
+                                    <select class="form-select" id="forma_pago" name="forma_pago" required>
+                                        <option value="">Seleccione una forma de pago:</option>
+                                        <?php foreach ($formasPago as $pagos): ?>                                            
+                                        <option value="<?php echo $pagos['id_forma_pago']; ?>">
+                                            <?php echo htmlspecialchars($pagos['forma']); ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>  
                                 </div>
                             </div>
 
@@ -109,7 +110,7 @@
                 <option value="" selected disabled>Seleccione servicio</option>
                 <?php foreach($servicios as $servicio): ?>
                 <option value="<?= $servicio['id_servicio'] ?>">
-                    <?= htmlspecialchars($servicio['nombre']) ?>
+                    <?= htmlspecialchars($servicio['nombre'])?> - <?= htmlspecialchars($servicio['unidad_medida']) ?> - <?= htmlspecialchars($servicio['precio_base']) ?>.bs
                 </option>
                 <?php endforeach; ?>
             </select>
