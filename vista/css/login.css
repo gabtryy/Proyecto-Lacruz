@@ -1,0 +1,44 @@
+ body {
+            background-image: linear-gradient(to bottom right,rgb(0, 109, 136),rgba(0, 6, 124, 0.9));
+            min-height: 100vh; 
+        }
+        .card {
+            background-image: linear-gradient(to bottom right,rgb(0, 140, 255),rgba(0, 4, 255, 0.9));
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.64); 
+        }
+        .form-control {
+            background-color: #e9ecef; 
+            border: 1px solid #ced4da; 
+        }
+        .form-control:focus {
+            background-color: #e9ecef; 
+            border-color: #80bdff; 
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+        }
+        .btn-primary {
+            background-color:linear-gradient(rgb(140, 0, 255), rgb(0, 47, 255));
+            border: none;
+        }
+
+        .gradient-custom-2 {
+            background-image: 
+                linear-gradient(to bottom right, rgba(170, 207, 255, 0.7), rgba(0, 47, 255, 0.68)),
+                url('vista/images/aseo-limpieza.jpg');
+            background-size: cover;
+            background-position: 85% 15%;
+            background-repeat: no-repeat;
+        }
+
+        @media (min-width: 768px) {
+            .gradient-form {
+                height: 100vh !important;
+            }
+        }
+        @media (min-width: 769px) {
+            .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+            }
+        }
