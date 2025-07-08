@@ -36,6 +36,18 @@
                                 <input type="number" step="0.01" min="0" class="form-control" id="precio_mayor" name="precio_mayor" required>
                             </div>
                         </div>
+
+                         <div class="col-md-6">
+                            <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+                            <select class="form-select" id="unidad_medida" name="id_unidad_medida" required>
+                                <option value="" selected disabled>Seleccione una unidad</option>
+                                <?php foreach ($unidades as $unidad): ?>
+                                    <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                        <?= htmlspecialchars($unidad['nombre']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         
                         <div class="col-md-12">
                             <div class="form-check form-switch">

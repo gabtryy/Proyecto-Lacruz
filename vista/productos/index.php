@@ -39,6 +39,7 @@
                                 <th>Stock</th>
                                 <th>Precicio Unit.</th>
                                 <th>Precicio Mayor</th>
+                                <th>Unidad de Medida</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -59,6 +60,7 @@
                                         </td>
                                         <td><?= number_format($p['precio'], 2, ',', '.') ?></td>
                                         <td><?= number_format($p['precio_mayor'], 2, ',', '.') ?></td>
+                                        <td><?= htmlspecialchars($p['unidad_medida'] ?? '') ?></td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <?php if ($p['es_fabricado']): ?>

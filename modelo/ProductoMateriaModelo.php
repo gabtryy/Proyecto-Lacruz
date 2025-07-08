@@ -96,11 +96,12 @@ class ProductoMateria extends Conexion {
 
     public function actualizar() {
         try {
-            $sql = "UPDATE producto_materia SET 
+            $sql = "UPDATE producto_materia SET
+                    id_materia =:id_materia, 
                     cantidad = :cantidad
                     WHERE id_promat = :id_promat";
             $stmt = $this->pdo->prepare($sql);
-            
+            $stmt->bindParam(':id_materia', $this->id_materia, PDO::PARAM_INT);
             $stmt->bindParam(':cantidad', $this->cantidad, PDO::PARAM_STR);
             $stmt->bindParam(':id_promat', $this->id_promat, PDO::PARAM_INT);
             

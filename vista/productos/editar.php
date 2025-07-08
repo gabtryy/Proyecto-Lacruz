@@ -38,6 +38,18 @@
                             </div>
                         </div>
                         
+                        <div class="col-md-6">
+                            <label for="edit_unidad_medida" class="form-label">Unidad de Medida</label>
+                            <select class="form-select" id="edit_unidad_medida" name="id_unidad_medida" required>
+                                <option value="" disabled>Seleccione una unidad</option>
+                                <?php foreach ($unidades as $unidad): ?>
+                                <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                <?= htmlspecialchars($unidad['nombre']) ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="edit_es_fabricado" name="es_fabricado" value="1">
@@ -80,58 +92,42 @@
 <script>
 $(document).ready(function() {
     let editMateriaCounter = 0;
-    const materiasPrimas = <?= json_encode($materiasPrimas) ?? '[]' ?>;
+    const materiasPrimas = window.materiasPrimasGlobal || [];
     
-    $(document).on('change', '#edit_es_fabricado', function() {
-        const isChecked = $(this).is(':checked');
-        
-        $('#edit_materiasPrimasSection').toggle(isChecked);
-        
-        $('#btnEditAgregarMateria').prop('disabled', !isChecked);
-        
-        if (!isChecked) {
-            $('#edit_materiasPrimasContainer').empty();
-            editMateriaCounter = 0;
-        }
-    });
-    
-
-    function agregarMateriaPrimaEdicion(materiaData = null) {
+    // Función para agregar materia prima (para edición)
+    function agregarMateriaPrimaEdicion(materiaExistente = null) {
         const contenedor = $('#edit_materiasPrimasContainer');
         const nuevoId = editMateriaCounter++;
         
         const html = `
-        <div class="row g-3 mb-3 materia-prima-item border-bottom pb-3" data-id="${nuevoId}">
-        <input type="hidden" name="materias[${nuevoId}][id_promat]" value="${materiaData?.id_promat || ''}">
-            <div class="col-md-6">
-                <label class="form-label">Materia Prima</label>
-                <select class="form-select" name="materias[${nuevoId}][id_materia]" required>
-                    <option value="" disabled>Seleccione una materia prima</option>
-                    ${generarOpcionesMaterias(materiaData?.id_materia)}
-                </select>
+            <div class="row g-3 mb-3 materia-prima-item border-bottom pb-3" data-id="${nuevoId}">
+                <input type="hidden" name="materias[${nuevoId}][id_promat]" value="${materiaExistente ? materiaExistente.id_promat : ''}">
+                <div class="col-md-6">
+                    <label class="form-label">Materia Prima</label>
+                    <select class="form-select" name="materias[${nuevoId}][id_materia]" required>
+                        <option value="" selected disabled>Seleccione una materia prima</option>
+                        ${generarOpcionesMaterias(materiaExistente ? materiaExistente.id_materia : null)}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Cantidad</label>
+                    <input type="number" step="0.001" min="0.001" class="form-control" 
+                           name="materias[${nuevoId}][cantidad]" required
+                           value="${materiaExistente ? materiaExistente.cantidad : ''}"
+                           placeholder="0.000">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-danger btn-eliminar-materia w-100">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label class="form-label">Cantidad</label>
-                <input type="number" step="0.001" min="0.001" class="form-control" 
-                       name="materias[${nuevoId}][cantidad]" required
-                       placeholder="0.000"
-                       value="${materiaData ? materiaData.cantidad : ''}">
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-danger btn-eliminar-materia w-100">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
-        </div>
         `;
         
         contenedor.append(html);
-        
-        if (materiaData) {
-            contenedor.find(`[name="materias[${nuevoId}][id_materia]"]`).val(materiaData.id_materia);
-        }
     }
     
+    // Generar opciones para el select de materias primas
     function generarOpcionesMaterias(selectedId = null) {
         let options = '';
         if (materiasPrimas && materiasPrimas.length > 0) {
@@ -147,14 +143,35 @@ $(document).ready(function() {
         return options;
     }
     
-    $('#btnEditAgregarMateria').click(() => agregarMateriaPrimaEdicion());
+    // Manejar el cambio en el checkbox de fabricado
+    $(document).on('change', '#edit_es_fabricado', function() {
+        const isChecked = $(this).is(':checked');
+        $('#edit_materiasPrimasSection').toggle(isChecked);
+        $('#btnEditAgregarMateria').prop('disabled', !isChecked);
+        
+        if (isChecked && $('#edit_materiasPrimasContainer').children().length === 0) {
+            agregarMateriaPrimaEdicion();
+        }
+        
+        if (!isChecked) {
+            $('#edit_materiasPrimasContainer').empty();
+            editMateriaCounter = 0;
+        }
+    });
     
-    $(document).on('click', '#edit_materiasPrimasContainer .btn-eliminar-materia', function() {
+    // Botón para agregar nueva materia prima
+    $('#btnEditAgregarMateria').click(function() {
+        agregarMateriaPrimaEdicion();
+    });
+    
+    // Eliminar materia prima
+    $(document).on('click', '.btn-eliminar-materia', function() {
         $(this).closest('.materia-prima-item').fadeOut(300, function() {
             $(this).remove();
         });
     });
     
+    // Validación del formulario
     $('#formEditarProducto').submit(function(e) {
         const esFabricado = $('#edit_es_fabricado').is(':checked');
         const tieneMaterias = $('#edit_materiasPrimasContainer').children().length > 0;
@@ -203,7 +220,8 @@ $(document).ready(function() {
         
         return true;
     });
-    
+
+    // Evento para editar producto
     $(document).on('click', '.btn-editar', function() {
         const idProducto = $(this).val();
         
@@ -217,6 +235,8 @@ $(document).ready(function() {
                     return;
                 }
                 
+                console.log('Respuesta del servidor:', response);
+                
                 const producto = response.producto;
                 const materiasProducto = response.materiasProducto || [];
                 
@@ -226,6 +246,9 @@ $(document).ready(function() {
                 $('#edit_precio').val(parseFloat(producto.precio).toFixed(2));
                 $('#edit_precio_mayor').val(parseFloat(producto.precio_mayor).toFixed(2));
                 
+                // Establecer la unidad de medida
+                $('#edit_unidad_medida').val(producto.id_unidad_medida);
+                
                 const esFabricado = producto.es_fabricado == 1;
                 $('#edit_es_fabricado').prop('checked', esFabricado);
                 $('#edit_materiasPrimasSection').toggle(esFabricado);
@@ -234,14 +257,21 @@ $(document).ready(function() {
                 $('#edit_materiasPrimasContainer').empty();
                 editMateriaCounter = 0;
                 
-                if (esFabricado && materiasProducto.length > 0) {
-                    materiasProducto.forEach(materia => {
-                        agregarMateriaPrimaEdicion({
-                            id_promat: materia.id_promat,
-                            id_materia: materia.id_materia,
-                            cantidad:materia.cantidad
+                if (esFabricado) {
+                    console.log('Materias primas del producto:', materiasProducto);
+                    
+                    if (materiasProducto.length > 0) {
+                        materiasProducto.forEach(materia => {
+                            console.log('Agregando materia prima:', materia);
+                            agregarMateriaPrimaEdicion({
+                                id_promat: materia.id_promat,
+                                id_materia: materia.id_materia,
+                                cantidad: materia.cantidad
+                            });
                         });
-                    });
+                    } else {
+                        agregarMateriaPrimaEdicion();
+                    }
                 }
 
                 $('#editarProductoModal').modal('show');

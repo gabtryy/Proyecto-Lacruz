@@ -7,6 +7,7 @@ class Producto extends Conexion {
     private $stock;
     private $precio;
     private $precio_mayor;
+    private $id_unidad_medida;
     private $es_fabricado;
 
     public function getConexion() {
@@ -57,6 +58,14 @@ class Producto extends Conexion {
         $this->precio_mayor = $precio_mayor;
         return $this;
     }
+    public function getIdUnidadMedida() {
+        return $this->id_unidad_medida;
+    }
+
+    public function setIdUnidadMedida($id_unidad_medida) {
+        $this->id_unidad_medida = $id_unidad_medida;
+        return $this;
+    }
 
     public function getEsFabricado() {
         return $this->es_fabricado;
@@ -68,33 +77,39 @@ class Producto extends Conexion {
     }
 
     public function listar() {
-        try {
-            $sql = "SELECT * FROM productos ORDER BY id_producto desc";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Error en Producto->listar(): " . $e->getMessage());
-            return [];
-        }
+    try {
+        $sql = "SELECT p.*, um.nombre as unidad_medida 
+                FROM productos p
+                LEFT JOIN unidades_medida um ON p.id_unidad_medida = um.id_unidad_medida
+                ORDER BY p.id_producto DESC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error en Producto->listar(): " . $e->getMessage());
+        return [];
     }
+}
 
     public function buscarPorId($id) {
         try {
-            $sql = "SELECT * FROM productos WHERE id_producto = ?";
+            $sql = "SELECT p.*, um.nombre as unidad_medida 
+                FROM productos p
+                LEFT JOIN unidades_medida um ON p.id_unidad_medida = um.id_unidad_medida
+                WHERE p.id_producto = ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error en Producto->buscarPorId(): " . $e->getMessage());
-            return false;
+        error_log("Error en Producto->buscarPorId(): " . $e->getMessage());
+        return false;
         }
     }
 
 public function registrar() {
     try {
-        $sql = "INSERT INTO productos (nombre, stock, precio, precio_mayor, es_fabricado) 
-                VALUES (:nombre, :stock, :precio, :precio_mayor, :es_fabricado)";
+        $sql = "INSERT INTO productos (nombre, stock, precio, precio_mayor, es_fabricado, id_unidad_medida) 
+                VALUES (:nombre, :stock, :precio, :precio_mayor, :es_fabricado,:id_unidad_medida)";
         $stmt = $this->pdo->prepare($sql);
         
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -102,6 +117,7 @@ public function registrar() {
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':precio_mayor', $this->precio_mayor);
         $stmt->bindParam(':es_fabricado', $this->es_fabricado, PDO::PARAM_INT);
+        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
         
         $result = $stmt->execute();
         
@@ -125,7 +141,8 @@ public function registrar() {
                 stock = :stock,
                 precio = :precio,
                 precio_mayor = :precio_mayor,
-                es_fabricado = :es_fabricado
+                es_fabricado = :es_fabricado,
+                id_unidad_medida = :id_unidad_medida
                 WHERE id_producto = :id_producto";
         $stmt = $this->pdo->prepare($sql);
         
@@ -134,6 +151,7 @@ public function registrar() {
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':precio_mayor', $this->precio_mayor);
         $stmt->bindParam(':es_fabricado', $this->es_fabricado, PDO::PARAM_INT);
+        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
         $stmt->bindParam(':id_producto', $this->id_producto, PDO::PARAM_INT);
         
         $result = $stmt->execute();
@@ -148,7 +166,7 @@ public function registrar() {
         error_log("PDOException en Producto->actualizar(): " . $e->getMessage());
         return false;
     }
-    }
+}
     public function eliminar() {
         try {
             $sql = "DELETE FROM productos WHERE id_producto = :id";

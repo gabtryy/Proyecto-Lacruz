@@ -2,6 +2,7 @@
 require_once 'modelo/ProductoModelo.php';
 require_once 'modelo/ProductoMateriaModelo.php';
 require_once 'modelo/MateriaPrimaModelo.php';
+require_once 'modelo/UnidadMedidaModelo.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -11,51 +12,54 @@ function isAjaxRequest() {
 $producto = new Producto();
 $productoMateria = new ProductoMateria();
 $materiaPrima = new MateriaPrima();
+$unidadMedida = new UnidadMedida();
 
 switch ($metodo) {
     case 'index':
         $productos = $producto->listar();
         $materiasPrimas = $materiaPrima->listar();
+        $unidades = $unidadMedida->listar();
+
         require 'vista/productos/index.php';
         break;
 
     case 'editar':
-        $id = $_GET['id'] ?? null; 
-        if (!$id) {
-            if (isAjaxRequest()) {
-                header('Content-Type: application/json');
-                echo json_encode(['error' => 'ID no proporcionado']);
-                exit;
-            }
-            header("Location: index.php?c=ProductoControlador&m=index");
-            exit;
-        }
-        
-        $productoActual = $producto->buscarPorId($id);
-        if (!$productoActual) {
-            if (isAjaxRequest()) {
-                header('Content-Type: application/json');
-                echo json_encode(['error' => 'Producto no encontrado']);
-                exit;
-            }
-            $_SESSION['tipo_mensaje'] = "error";
-            $_SESSION['mensaje'] = "Producto no encontrado";
-            header("Location: index.php?c=ProductoControlador&m=index");
-            exit;
-        }
-        
+    $id = $_GET['id'] ?? null; 
+    if (!$id) {
         if (isAjaxRequest()) {
-            $materiasProducto = $productoMateria->listarPorProducto($id);
-            
             header('Content-Type: application/json');
-            echo json_encode([
-                'producto' => $productoActual,
-                'materiasProducto' => $materiasProducto,
-                'materiasPrimas' => $materiaPrima->listar()
-            ]);
+            echo json_encode(['error' => 'ID no proporcionado']);
             exit;
         }
-        break;
+        header("Location: index.php?c=ProductoControlador&m=index");
+        exit;
+    }
+    
+    $productoActual = $producto->buscarPorId($id);
+    if (!$productoActual) {
+        if (isAjaxRequest()) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Producto no encontrado']);
+            exit;
+        }
+        $_SESSION['tipo_mensaje'] = "error";
+        $_SESSION['mensaje'] = "Producto no encontrado";
+        header("Location: index.php?c=ProductoControlador&m=index");
+        exit;
+    }
+    
+    if (isAjaxRequest()) {
+        $materiasProducto = $productoMateria->listarPorProducto($id);
+        
+        header('Content-Type: application/json');
+        echo json_encode([
+            'producto' => $productoActual,
+            'materiasProducto' => $materiasProducto,
+            'materiasPrimas' => $materiaPrima->listar()
+        ]);
+        exit;
+    }
+    break;
         
     case 'guardar':
         $data = $_POST;
@@ -106,6 +110,7 @@ switch ($metodo) {
         $producto->setPrecio($data['precio']);
         $producto->setPrecioMayor($data['precio_mayor']);
         $producto->setEsFabricado($esFabricado);
+        $producto->setIdUnidadMedida($data['id_unidad_medida']);
 
       try {
     $conexion = $producto->getConexion();
@@ -187,6 +192,7 @@ switch ($metodo) {
         $producto->setPrecioMayor($_POST['precio_mayor']);
         $esFabricado = isset($_POST['es_fabricado']) ? 1 : 0;
         $producto->setEsFabricado($esFabricado);
+        $producto->setIdUnidadMedida($_POST['id_unidad_medida']);
         
         if (!$producto->actualizar()) {
             throw new Exception("Error al actualizar el producto principal");
