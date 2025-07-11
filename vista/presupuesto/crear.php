@@ -75,19 +75,13 @@
                                                value="0.00" readonly>
                                         <span class="input-group-text">Bs.</span>
                                     </div>
-                                    <label for="cliente_rif" class="form-label">Forma de pago</label>
-                                    <select class="form-select" id="forma_pago" name="forma_pago" required>
-                                        <option value="">Seleccione una forma de pago:</option>
-                                        <?php foreach ($formasPago as $pagos): ?>                                            
-                                        <option value="<?php echo $pagos['id_forma_pago']; ?>">
-                                            <?php echo htmlspecialchars($pagos['forma']); ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>  
+                                    
+                                    
+                                      
                                 </div>
                             </div>
 
-                            <!-- Botones -->
+                          
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <a href="index.php?action=presupuestos" class="btn btn-secondary me-md-2">
                                     <i class="fas fa-times"></i> Cancelar

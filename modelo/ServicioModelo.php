@@ -3,7 +3,7 @@ require_once 'modelo/conexion.php';
 
 class Servicio extends Conexion {
     private $id_servicio;
-    private $id_unidad_medida;
+    private $id_unidad_medida_servicio;
     private $nombre;
     private $descripcion;
     private $precio_base;
@@ -19,11 +19,11 @@ class Servicio extends Conexion {
     }
 
     public function getIdUnidadMedida() {
-        return $this->id_unidad_medida;
+        return $this->id_unidad_medida_servicio;
     }
 
-    public function setIdUnidadMedida($id_unidad_medida) {
-        $this->id_unidad_medida = $id_unidad_medida;
+    public function setIdUnidadMedida($id_unidad_medida_servicio) {
+        $this->id_unidad_medida_servicio = $id_unidad_medida_servicio;
         return $this;
     }
 
@@ -58,7 +58,7 @@ class Servicio extends Conexion {
         try {
             $sql = "SELECT s.*, um.nombre AS unidad_medida 
                     FROM tipo_servicio s
-                    JOIN unidades_medida um ON s.id_unidad_medida = um.id_unidad_medida
+                    JOIN unidades_medida_servicio um ON s.id_unidad_medida_servicio = um.id_unidad_medida_servicio
                     ORDER BY s.id_servicio DESC";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
@@ -73,7 +73,7 @@ class Servicio extends Conexion {
         try {
             $sql = "SELECT s.*, um.nombre AS nombre_unidad_medida 
                 FROM tipo_servicio s 
-                JOIN unidades_medida um ON s.id_unidad_medida = um.id_unidad_medida 
+                JOIN unidades_medida_servicio um ON s.id_unidad_medida_servicio = um.id_unidad_medida_servicio 
                 WHERE s.id_servicio = ?";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute([$id]);
@@ -86,11 +86,11 @@ class Servicio extends Conexion {
 
     public function registrar() {
         try {
-            $sql = "INSERT INTO tipo_servicio (id_unidad_medida, nombre, descripcion, precio_base) 
-                    VALUES (:id_unidad_medida, :nombre, :descripcion, :precio_base)";
+            $sql = "INSERT INTO tipo_servicio (id_unidad_medida_servicio, nombre, descripcion, precio_base) 
+                    VALUES (:id_unidad_medida_servicio, :nombre, :descripcion, :precio_base)";
             $stmt = $this->pdo->prepare($sql);
             
-            $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
+            $stmt->bindParam(':id_unidad_medida_servicio', $this->id_unidad_medida_servicio, PDO::PARAM_INT);
             $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
             $stmt->bindParam(':descripcion', $this->descripcion, PDO::PARAM_STR);
             $stmt->bindParam(':precio_base', $this->precio_base);
@@ -105,14 +105,14 @@ class Servicio extends Conexion {
     public function actualizar() {
         try {
             $sql = "UPDATE tipo_servicio SET 
-                    id_unidad_medida = :id_unidad_medida,
+                    id_unidad_medida_servicio = :id_unidad_medida_servicio,
                     nombre = :nombre,
                     descripcion = :descripcion,
                     precio_base = :precio_base
                     WHERE id_servicio = :id_servicio";
             $stmt = $this->pdo->prepare($sql);
             
-            $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
+            $stmt->bindParam(':id_unidad_medida_servicio', $this->id_unidad_medida_servicio, PDO::PARAM_INT);
             $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
             $stmt->bindParam(':descripcion', $this->descripcion, PDO::PARAM_STR);
             $stmt->bindParam(':precio_base', $this->precio_base);

@@ -18,7 +18,7 @@ switch ($metodo) {
         break;
 
     case 'crear':
-        $formasPago = $presupuestoModel->formasdePago();
+        $condicionPago = $presupuestoModel->formasdePago();
         $clientes = $clienteModel->listar();
         $servicios = $servicioModel->listar();
         $productos = $productoModel->listar();
@@ -92,7 +92,6 @@ switch ($metodo) {
             'rif' => $_POST['rif_cliente'],
             'fecha' => $fecha_registro,
             'orden_compra' => $_POST['orden_compra'],
-            'forma_pago' => $_POST['forma_pago'],
             'id_iva' => $ivaid,
             'total_iva' => $totaliva,
             'total' => $total,

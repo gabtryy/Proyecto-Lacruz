@@ -13,7 +13,7 @@
                     <i class="fas fa-trash-alt fa-4x" style="color: #aaa;"></i>
                 </div>
                 <h5 class="fw-bold mb-2 text-dark">¿Confirmar eliminación?</h5>
-                <p class="text-muted mb-0">El servicio será eliminado permanentemente del sistema.</p>
+                <p class="text-muted mb-0">El cliente será eliminado permanentemente del sistema.</p>
                 <p class="text-muted">Esta acción no puede revertirse.</p>
             </div>
             

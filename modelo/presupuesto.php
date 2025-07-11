@@ -27,7 +27,7 @@ JOIN cliente c ON f.rif = c.rif";
     }
 
     public function formasdePago() {
-        $sql = "SELECT * FROM forma_pago";
+        $sql = "SELECT * FROM condicion_pago";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,13 +42,13 @@ JOIN cliente c ON f.rif = c.rif";
    public function guardarpresupuesto($datosPresupuesto, $servicios, $productos) {
     $this->pdo->beginTransaction();
 
-    $sqlPresupuesto = "INSERT INTO factura (rif, fecha, numero_orden, id_forma_pago, id_iva, total_iva, total_general, id_tasa, estado_pago, estatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sqlPresupuesto = "INSERT INTO factura (rif, fecha, numero_orden, id_iva, total_iva, total_general, id_tasa, estado_pago, estatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmtPresupuesto = $this->pdo->prepare($sqlPresupuesto);
     $stmtPresupuesto->execute([
         $datosPresupuesto['rif'],
         $datosPresupuesto['fecha'],
         $datosPresupuesto['orden_compra'],
-        $datosPresupuesto['forma_pago'],
+        //condicion de pago
         $datosPresupuesto['id_iva'],
         $datosPresupuesto['total_iva'],
         $datosPresupuesto['total'],

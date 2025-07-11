@@ -39,10 +39,10 @@
 
                          <div class="col-md-6">
                             <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-                            <select class="form-select" id="unidad_medida" name="id_unidad_medida" required>
+                            <select class="form-select" id="unidad_medida" name="unidades_medida_producto_id" required>
                                 <option value="" selected disabled>Seleccione una unidad</option>
                                 <?php foreach ($unidades as $unidad): ?>
-                                    <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                    <option value="<?= $unidad['unidades_medida_producto_id'] ?>">
                                         <?= htmlspecialchars($unidad['nombre']) ?>
                                     </option>
                                 <?php endforeach; ?>

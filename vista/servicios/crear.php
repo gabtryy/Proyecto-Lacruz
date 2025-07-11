@@ -12,16 +12,16 @@
                 <form id="formServicio" action="index.php?c=ServicioControlador&m=guardar" method="POST">
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label for="nombre" class="form-label">Nombre del Servicio</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <label for="crear_nombre" class="form-label">Nombre del Servicio</label>
+                            <input type="text" class="form-control" id="crear_nombre" name="nombre" required>
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-                            <select class="form-select" id="unidad_medida" name="id_unidad_medida" required>
+                            <label for="crear_unidad_medida" class="form-label">Unidad de Medida</label>
+                            <select class="form-select" id="crear_unidad_medida" name="id_unidad_medida" required>
                                 <option value="" selected disabled>Seleccione una unidad</option>
                                 <?php foreach ($unidades as $unidad): ?>
-                                    <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                    <option value="<?= $unidad['id_unidad_medida_servicio'] ?>">
                                         <?= htmlspecialchars($unidad['nombre']) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -29,16 +29,16 @@
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="precio_base" class="form-label">Precio Base</label>
+                            <label for="crear_precio_base" class="form-label">Precio Base</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input type="number" step="0.01" min="0" class="form-control" id="precio_base" name="precio_base" required>
+                                <input type="number" step="0.01" min="0" class="form-control" id="crear_precio_base" name="precio_base" required>
                             </div>
                         </div>
                         
                         <div class="col-12">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                            <label for="crear_descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="crear_descripcion" name="descripcion" rows="3"></textarea>
                         </div>
                     </div>
                 </form>

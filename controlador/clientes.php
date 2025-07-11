@@ -124,7 +124,19 @@ switch ($metodo) {
         echo json_encode($cliente);
         exit;
         break;
-
+    case 'informacion':
+        
+        if (isset($_GET['rif'])) {
+            $clienteModel = new ClienteModel();
+            $cliente = $clienteModel->obtener($_GET['rif']);
+           
+            $presupuestos = $clienteModel->obtenerpresupuestos($_GET['rif']);
+            require 'vista/clientes/informacion.php';
+        } else {
+            header("Location: index.php?c=clientes&m=index");
+            exit;
+        }
+        break;
     default:
         header("Location: index.php?c=clientes&m=index");
         exit;

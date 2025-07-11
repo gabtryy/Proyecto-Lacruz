@@ -186,5 +186,14 @@ class ClienteModel extends Conexion {
             return false; 
         }
     }
+    public function obtenerpresupuestos($rif) {
+        $sql = "SELECT p.id_factura, p.fecha, p.total_general, p.estatus
+                FROM factura p
+                JOIN cliente c ON p.rif = c.rif
+                WHERE c.rif = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$rif]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

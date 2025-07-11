@@ -23,7 +23,7 @@
                             <select class="form-select" name="id_unidad_medida" id="id_unidad_medida" required>
                                 <option value="" disabled>Seleccione una unidad</option>
                                 <?php foreach ($unidades as $unidad): ?>
-                                    <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                    <option value="<?= $unidad['id_unidad_medida_servicio'] ?>">
                                         <?= htmlspecialchars($unidad['nombre']) ?>
                                     </option>
                                 <?php endforeach; ?>

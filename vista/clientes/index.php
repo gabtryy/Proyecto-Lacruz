@@ -46,12 +46,15 @@
                                  <td><?= htmlspecialchars($cli['fecha_registro']) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm btn-editar-cliente"
-        data-rif="<?= $cli['rif'] ?>">
-    <i class="fas fa-edit"></i>
-</button>
+                                    data-rif="<?= $cli['rif'] ?>">
+                                    <i class="fas fa-edit"></i>
+                                    </button>
                                 
                                      <button type="button" class="btn btn-danger btn-sm btn-eliminar" data-id="<?= $cli['rif'] ?>"data-controlador="clientes">
                                                     <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                     <button type="button" class="btn btn-primary btn-sm">  <a href="index.php?c=clientes&m=informacion&rif=<?=$cli['rif']?>">
+                                    <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
                             </tr>

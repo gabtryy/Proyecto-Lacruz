@@ -1,6 +1,6 @@
 <?php
 require_once 'modelo/ServicioModelo.php';
-require_once 'modelo/UnidadMedidaModelo.php';
+require_once 'modelo/UnidadMedidaServicioModelo.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -8,7 +8,7 @@ function isAjaxRequest() {
 }
 
 $servicio = new Servicio();
-$unidadMedida = new UnidadMedida();
+$unidadMedida = new UnidadMedidaServicio();
 
 switch ($metodo) {
    case 'index':
@@ -55,7 +55,7 @@ case 'editar':
             'nombre' => $servicioActual['nombre'],
             'descripcion' => $servicioActual['descripcion'],
             'precio_base' => $servicioActual['precio_base'],
-            'id_unidad_medida' => $servicioActual['id_unidad_medida']
+            'id_unidad_medida' => $servicioActual['id_unidad_medida_servicio']
         ]);
         exit;
     }

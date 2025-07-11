@@ -2,7 +2,7 @@
 require_once 'modelo/ProductoModelo.php';
 require_once 'modelo/ProductoMateriaModelo.php';
 require_once 'modelo/MateriaPrimaModelo.php';
-require_once 'modelo/UnidadMedidaModelo.php';
+require_once 'modelo/UnidadMedidaProductoModelo.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -12,7 +12,7 @@ function isAjaxRequest() {
 $producto = new Producto();
 $productoMateria = new ProductoMateria();
 $materiaPrima = new MateriaPrima();
-$unidadMedida = new UnidadMedida();
+$unidadMedida = new UnidadMedidaProducto();
 
 switch ($metodo) {
     case 'index':
@@ -110,7 +110,7 @@ switch ($metodo) {
         $producto->setPrecio($data['precio']);
         $producto->setPrecioMayor($data['precio_mayor']);
         $producto->setEsFabricado($esFabricado);
-        $producto->setIdUnidadMedida($data['id_unidad_medida']);
+        $producto->setIdUnidadMedida($data['unidades_medida_producto_id']);
 
       try {
     $conexion = $producto->getConexion();
@@ -192,7 +192,7 @@ switch ($metodo) {
         $producto->setPrecioMayor($_POST['precio_mayor']);
         $esFabricado = isset($_POST['es_fabricado']) ? 1 : 0;
         $producto->setEsFabricado($esFabricado);
-        $producto->setIdUnidadMedida($_POST['id_unidad_medida']);
+        $producto->setIdUnidadMedida($_POST['unidades_medida_producto_id']);
         
         if (!$producto->actualizar()) {
             throw new Exception("Error al actualizar el producto principal");

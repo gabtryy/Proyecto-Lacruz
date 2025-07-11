@@ -7,8 +7,8 @@ class Producto extends Conexion {
     private $stock;
     private $precio;
     private $precio_mayor;
-    private $id_unidad_medida;
     private $es_fabricado;
+    private $id_unidad_medida_producto;
 
     public function getConexion() {
         return $this->pdo;
@@ -59,11 +59,11 @@ class Producto extends Conexion {
         return $this;
     }
     public function getIdUnidadMedida() {
-        return $this->id_unidad_medida;
+        return $this->id_unidad_medida_producto;
     }
 
-    public function setIdUnidadMedida($id_unidad_medida) {
-        $this->id_unidad_medida = $id_unidad_medida;
+    public function setIdUnidadMedida($unidades_medida_producto_id) {
+        $this->id_unidad_medida_producto = $unidades_medida_producto_id;
         return $this;
     }
 
@@ -79,9 +79,9 @@ class Producto extends Conexion {
     public function listar() {
     try {
         $sql = "SELECT p.*, um.nombre as unidad_medida 
-                FROM productos p
-                LEFT JOIN unidades_medida um ON p.id_unidad_medida = um.id_unidad_medida
-                ORDER BY p.id_producto DESC";
+        FROM productos p
+        LEFT JOIN unidades_medida_producto um ON p.id_unidad_medida_producto = um.unidades_medida_producto_id
+        ORDER BY p.id_producto DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -94,9 +94,9 @@ class Producto extends Conexion {
     public function buscarPorId($id) {
         try {
             $sql = "SELECT p.*, um.nombre as unidad_medida 
-                FROM productos p
-                LEFT JOIN unidades_medida um ON p.id_unidad_medida = um.id_unidad_medida
-                WHERE p.id_producto = ?";
+        FROM productos p
+        LEFT JOIN unidades_medida_producto um ON p.id_unidad_medida_producto = um.unidades_medida_producto_id
+        WHERE p.id_producto = ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -108,7 +108,7 @@ class Producto extends Conexion {
 
 public function registrar() {
     try {
-        $sql = "INSERT INTO productos (nombre, stock, precio, precio_mayor, es_fabricado, id_unidad_medida) 
+        $sql = "INSERT INTO productos (nombre, stock, precio, precio_mayor, es_fabricado, id_unidad_medida_producto) 
                 VALUES (:nombre, :stock, :precio, :precio_mayor, :es_fabricado,:id_unidad_medida)";
         $stmt = $this->pdo->prepare($sql);
         
@@ -117,7 +117,7 @@ public function registrar() {
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':precio_mayor', $this->precio_mayor);
         $stmt->bindParam(':es_fabricado', $this->es_fabricado, PDO::PARAM_INT);
-        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
+        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida_producto, PDO::PARAM_INT);
         
         $result = $stmt->execute();
         
@@ -142,7 +142,7 @@ public function registrar() {
                 precio = :precio,
                 precio_mayor = :precio_mayor,
                 es_fabricado = :es_fabricado,
-                id_unidad_medida = :id_unidad_medida
+                id_unidad_medida_producto = :id_unidad_medida
                 WHERE id_producto = :id_producto";
         $stmt = $this->pdo->prepare($sql);
         
@@ -151,7 +151,7 @@ public function registrar() {
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':precio_mayor', $this->precio_mayor);
         $stmt->bindParam(':es_fabricado', $this->es_fabricado, PDO::PARAM_INT);
-        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida, PDO::PARAM_INT);
+        $stmt->bindParam(':id_unidad_medida', $this->id_unidad_medida_producto, PDO::PARAM_INT);
         $stmt->bindParam(':id_producto', $this->id_producto, PDO::PARAM_INT);
         
         $result = $stmt->execute();

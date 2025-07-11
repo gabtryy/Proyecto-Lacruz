@@ -40,10 +40,10 @@
                         
                         <div class="col-md-6">
                             <label for="edit_unidad_medida" class="form-label">Unidad de Medida</label>
-                            <select class="form-select" id="edit_unidad_medida" name="id_unidad_medida" required>
+                            <select class="form-select" id="edit_unidad_medida" name="unidades_medida_producto_id" required>
                                 <option value="" disabled>Seleccione una unidad</option>
                                 <?php foreach ($unidades as $unidad): ?>
-                                <option value="<?= $unidad['id_unidad_medida'] ?>">
+                                <option value="<?= $unidad['unidades_medida_producto_id'] ?>">
                                 <?= htmlspecialchars($unidad['nombre']) ?>
                                 </option>
                                 <?php endforeach; ?>
@@ -247,7 +247,7 @@ $(document).ready(function() {
                 $('#edit_precio_mayor').val(parseFloat(producto.precio_mayor).toFixed(2));
                 
                 // Establecer la unidad de medida
-                $('#edit_unidad_medida').val(producto.id_unidad_medida);
+                $('#edit_unidad_medida').val(producto.id_unidad_medida_producto);
                 
                 const esFabricado = producto.es_fabricado == 1;
                 $('#edit_es_fabricado').prop('checked', esFabricado);
