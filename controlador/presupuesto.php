@@ -37,64 +37,66 @@ switch ($metodo) {
 
         $fecha_registro = date("Y-m-d H:i:s");
 
-        // Calcular subtotales y total en el backend
+        $subtotal = 0;
         $productos = [];
         $servicios = [];
-        $total = 0;
 
+        
         if (isset($_POST['servicios']) && is_array($_POST['servicios'])) {
             foreach ($_POST['servicios'] as $servicio) {
                 if (
                     isset($servicio['id_servicio']) &&
                     isset($servicio['cantidad'])
                 ) {
-                    // Obtener precio real desde la base de datos
                     $infoServicio = $servicioModel->buscarPorId($servicio['id_servicio']);
                     $precio = $infoServicio['precio_base'];
                     $cantidad = (int)$servicio['cantidad'];
-                    $subtotal = $precio * $cantidad;
-                    $total += $subtotal;
+                    $servicio_subtotal = $precio * $cantidad;
+                    $subtotal += $servicio_subtotal;
 
                     $servicios[] = [
                         'id_servicio' => $servicio['id_servicio'],
                         'cantidad' => $cantidad,
-                        'subtotal' => $subtotal
+                        'subtotal' => $servicio_subtotal
                     ];
                 }
             }
         }
+
+      
         if (isset($_POST['producto']) && is_array($_POST['producto'])) {
             foreach ($_POST['producto'] as $producto) {
                 if (
                     isset($producto['id_producto']) &&
                     isset($producto['cantidad'])
                 ) {
-                    // Obtener precio real desde la base de datos
                     $infoProducto = $productoModel->buscarPorId($producto['id_producto']);
                     $precio = $infoProducto['precio'];
                     $cantidad = (int)$producto['cantidad'];
-                    $subtotal = $precio * $cantidad;
-                    $total += $subtotal;
+                    $producto_subtotal = $precio * $cantidad;
+                    $subtotal += $producto_subtotal;
 
                     $productos[] = [
                         'id_producto' => $producto['id_producto'],
                         'cantidad' => $cantidad,
-                        'subtotal' => $subtotal
+                        'subtotal' => $producto_subtotal
                     ];
                 }
             }
         }
 
-        $ivapor = ($total * $porcentajeIva) / 100;
-        $totaliva = $total + $ivapor;
+        
+        $iva_monto = ($subtotal * $porcentajeIva) / 100;
+        $total_general = $subtotal + $iva_monto;
 
         $datosPresupuesto = [
             'rif' => $_POST['rif_cliente'],
             'fecha' => $fecha_registro,
             'orden_compra' => $_POST['orden_compra'],
             'id_iva' => $ivaid,
-            'total_iva' => $totaliva,
-            'total' => $total,
+            'total_iva' => $iva_monto,
+            'total' => $subtotal,
+            'total_general' => $total_general,
             'id_tasa' => $tasaid,
             'estado_pago' => 'pendiente',
             'estatus' => 'presupuesto'
@@ -116,39 +118,18 @@ switch ($metodo) {
 
     case 'ver':
         $id = $_GET['id'];
-        $presupuesto = $presupuestoModel->obtener($id);
-        $servicios = $presupuestoModel->obtenerServicios($id);
-        $productos = $presupuestoModel->obtenerProductos($id);
-        require 'vista/presupuestos/ver.php';
+        $data = $presupuestoModel->obtenerP($id);
+        $presupuesto = $data['presupuesto'];
+        $productos = $data['productos'];
+        $servicios = $data['servicios'];
+        require 'vista/presupuesto/ver.php';
         break;
 
-    case 'aprobar':
-        $id = $_GET['id'];
-        if ($presupuestoModel->cambiarEstado($id, 'aprobado')) {
-            header("Location: index.php?c=presupuestos&m=ver&id=$id&status=success_approve");
-        } else {
-            header("Location: index.php?c=presupuestos&m=ver&id=$id&status=error_approve");
-        }
-        break;
-
-    case 'rechazar':
-        $id = $_GET['id'];
-        if ($presupuestoModel->cambiarEstado($id, 'rechazado')) {
-            header("Location: index.php?c=presupuestos&m=ver&id=$id&status=success_reject");
-        } else {
-            header("Location: index.php?c=presupuestos&m=ver&id=$id&status=error_reject");
-        }
-        break;
+ 
 
     
 
-    case 'generarFactura':
-        $id = $_GET['id'];
-        // Aquí iría la lógica para generar la factura
-        // Por ahora solo redirigimos
-        header("Location: index.php?c=facturas&m=crear&id_presupuesto=$id");
-        break;
-
+  
     default:
         echo "Acción no válida.";
         break;

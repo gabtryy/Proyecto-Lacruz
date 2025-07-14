@@ -35,11 +35,11 @@
                                 <td><?= htmlspecialchars(number_format($presupuesto['total_general'], 2, ',', '.')) ?> Bs.</td>
                                 <td><?= htmlspecialchars($presupuesto['fecha']) ?></td>
                                 <td>
-                                    <a href="index.php?c=presupuestos&m=ver&id=<?= $presupuesto['id_factura'] ?>" 
+                                    <a href="index.php?c=presupuesto&m=ver&id=<?= $presupuesto['id_factura'] ?>" 
                                        class="btn btn-info btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="index.php?c=presupuestos&m=editar&id=<?= $presupuesto['id_factura'] ?>" 
+                                    <a href="index.php?c=presupuesto&m=editar&id=<?= $presupuesto['id_factura'] ?>" 
                                        class="btn btn-primary btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
