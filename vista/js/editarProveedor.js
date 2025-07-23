@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(res => res.json())
                 .then(data => {
                     document.getElementById('id_proveedores').value = data.id_proveedores;
-                    document.getElementById('nombre_editar').value = data.nombre_provedor;
+                    document.getElementById('nombre_editar').value = data.nombre;
                     document.getElementById('telefono_editar').value = data.telefono;
                     document.getElementById('direccion_detalle_editar').value = data.calle;
                     document.getElementById('email_editar').value = data.correo;

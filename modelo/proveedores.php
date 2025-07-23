@@ -19,7 +19,7 @@ public function registrarProveedor($datos) {
 public function listar() {
         $sql = "SELECT
     p.id_proveedores,
-    p.nombre AS nombre_provedor,
+    p.nombre AS nombre,
     p.telefono,
     p.correo,
     d.calle,
@@ -55,7 +55,7 @@ public function obtener($id_proveedores)
     {
         $sql = "SELECT
             p.id_proveedores,
-            p.nombre AS nombre_provedor,
+            p.nombre AS nombre,
             p.telefono,
             p.correo,
             d.calle,

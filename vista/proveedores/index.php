@@ -32,7 +32,7 @@
                             <tr>
                                 <td><?= htmlspecialchars($pro['id_proveedores']) ?></td>
                                 <td><?= htmlspecialchars($pro['estado']) ?> <?= htmlspecialchars($pro['municipio']) ?> <?= htmlspecialchars($pro['ciudad']) ?> <?= htmlspecialchars($pro['calle']) ?></td>
-                                <td><?= htmlspecialchars($pro['nombre_provedor']) ?></td>
+                                <td><?= htmlspecialchars($pro['nombre']) ?></td>
                                 <td><?= htmlspecialchars($pro['correo']) ?></td>
                                 <td><?= htmlspecialchars($pro['telefono']) ?></td>
                                 <td>
